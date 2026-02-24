@@ -39,11 +39,8 @@ a {
   min-height: 100vh;
   overflow: hidden;
   background-color: #000000;
-  background-image: linear-gradient(
-      to right,
-      rgba(105, 71, 71, 0.1) 1px,
-      transparent 1px
-    ),
+  background-image:
+    linear-gradient(to right, rgba(105, 71, 71, 0.1) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(105, 71, 71, 0.15) 1px, transparent 1px),
     radial-gradient(
       circle at 50% 0%,
@@ -51,7 +48,10 @@ a {
       rgba(0, 0, 0, 1) 40%,
       rgba(0, 0, 0, 1) 70%
     );
-  background-size: 32px 32px, 32px 32px, 100% 100%;
+  background-size:
+    32px 32px,
+    32px 32px,
+    100% 100%;
 }
 
 .background-hero-pattern {
@@ -62,11 +62,8 @@ a {
   width: 100%;
   background-color: #000000;
 
-  background-image: linear-gradient(
-      to right,
-      rgba(105, 71, 71, 0.1) 1px,
-      transparent 1px
-    ),
+  background-image:
+    linear-gradient(to right, rgba(105, 71, 71, 0.1) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(105, 71, 71, 0.1) 1px, transparent 1px),
     radial-gradient(
       circle at 50% 0%,
@@ -74,7 +71,10 @@ a {
       rgba(60, 10, 15, 0.3) 40%,
       rgba(0, 0, 0, 1) 70%
     );
-  background-size: 32px 32px, 32px 32px, 100% 100%;
+  background-size:
+    32px 32px,
+    32px 32px,
+    100% 100%;
 }
 
 .content {
@@ -139,8 +139,13 @@ a {
 .header-container.scrolled {
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
-  box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000,
-    0 1px 3px 0 rgb(0 0 0 / 0.2), 0 1px 2px -1px rgb(0 0 0 / 0.2);
+  box-shadow:
+    0 0 #0000,
+    0 0 #0000,
+    0 0 #0000,
+    0 0 #0000,
+    0 1px 3px 0 rgb(0 0 0 / 0.2),
+    0 1px 2px -1px rgb(0 0 0 / 0.2);
 }
 
 .btn {
@@ -161,6 +166,7 @@ a {
 }
 
 .btn-primary {
+  text-align: center;
   border: none;
   padding: 16px 24px;
   color: var(--clr-white);
@@ -212,7 +218,9 @@ a {
   border-radius: 9999px;
   color: #b7b7b7;
   border: 1px solid var(--clr-primary);
-  box-shadow: inset 0 0 0 1px #8e1616, 0 0 4px 0 #8e1616b9;
+  box-shadow:
+    inset 0 0 0 1px #8e1616,
+    0 0 4px 0 #8e1616b9;
 }
 
 .hero-text {
@@ -425,7 +433,9 @@ a {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  transition: transform 0.3s ease, border-color 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .pricing-card:hover {
@@ -585,7 +595,9 @@ a {
 .faq-answer {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease, margin 0.3s ease;
+  transition:
+    max-height 0.3s ease,
+    margin 0.3s ease;
 }
 
 .faq-item.active .faq-answer {
@@ -793,11 +805,8 @@ a {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(
-      to right,
-      rgba(142, 22, 22, 0.03) 1px,
-      transparent 1px
-    ),
+  background-image:
+    linear-gradient(to right, rgba(142, 22, 22, 0.03) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(142, 22, 22, 0.03) 1px, transparent 1px);
   background-size: 20px 20px;
 }
@@ -1044,6 +1053,6 @@ a {
   display: block;
 }
 
-button{
+button {
   cursor: pointer;
 }
