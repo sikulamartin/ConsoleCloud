@@ -9,7 +9,7 @@ if (isset($_SESSION['user_id'])) {
     $stmt = $pdo->prepare("SELECT jmeno, email FROM OSOBY WHERE id_osoba = ?");
     $stmt->execute([$_SESSION['user_id']]);
     $prihlaseny_uzivatel = $stmt->fetch();
-    
+
     if ($prihlaseny_uzivatel) {
         if ($prihlaseny_uzivatel['jmeno'] === 'Nezadáno') {
             $zobrazene_jmeno = explode('@', $prihlaseny_uzivatel['email'])[0];
@@ -63,20 +63,24 @@ if (isset($_SESSION['user_id'])) {
                     </ul>
                     <div class="header-actions-wrapper">
                         <?php if ($prihlaseny_uzivatel): ?>
-    <a href="profile.php" style="color: white; font-weight: 500; margin-right: 15px; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='var(--clr-primary)'" onmouseout="this.style.color='white'">
-        Hello, <?= $zobrazene_jmeno ?>!
-    </a>
-    <a href="auth/logout.php" class="btn btn-secondary">Log out</a>
-<?php else: ?>
-    <a href="login.php" class="btn btn-secondary">Log in</a>
-    <a href="register.php" class="btn btn-primary">
-        Get Started
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M1 7.72705H15" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M9.27246 2L14.9997 7.72727L9.27246 13.4545" stroke="white" stroke-width="1.27273" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-    </a>
-<?php endif; ?>
+                            <a href="profile.php"
+                                style="color: white; font-weight: 500; margin-right: 15px; text-decoration: none; transition: color 0.3s ease;"
+                                onmouseover="this.style.color='var(--clr-primary)'" onmouseout="this.style.color='white'">
+                                Hello, <?= $zobrazene_jmeno ?>!
+                            </a>
+                            <a href="auth/logout.php" class="btn btn-secondary">Log out</a>
+                        <?php else: ?>
+                            <a href="login.php" class="btn btn-secondary">Log in</a>
+                            <a href="register.php" class="btn btn-primary">
+                                Get Started
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+                                    fill="none">
+                                    <path d="M1 7.72705H15" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M9.27246 2L14.9997 7.72727L9.27246 13.4545" stroke="white"
+                                        stroke-width="1.27273" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </a>
+                        <?php endif; ?>
                     </div>
 
 
@@ -93,19 +97,23 @@ if (isset($_SESSION['user_id'])) {
                     <a href="pricing.php" class="mobile-link">Pricing</a>
                     <a href="contact.php" class="mobile-link">Contact</a>
                     <?php if ($prihlaseny_uzivatel): ?>
-                            <a href="dashboard.php" class="mobile-link">Dashboard</a>
-                        <?php endif; ?>
+                        <a href="dashboard.php" class="mobile-link">Dashboard</a>
+                    <?php endif; ?>
                 </nav>
                 <div class="mobile-actions">
                     <?php if ($prihlaseny_uzivatel): ?>
-    <a href="dashboard.php" class="btn btn-primary" style="display: flex; width: 100%; justify-content: center; background: transparent; border: 1px solid var(--clr-primary);">
-        Dashboard (<?= $zobrazene_jmeno ?>)
-    </a>
-    <a href="auth/logout.php" class="btn btn-secondary" style="display: flex; width: 100%; justify-content: center;">Log out</a>
-<?php else: ?>
-    <a href="login.php" class="btn btn-secondary" style="display: flex; width: 100%; justify-content: center;">Log in</a>
-    <a href="register.php" class="btn btn-primary" style="display: flex; width: 100%; justify-content: center;">Get Started</a>
-<?php endif; ?>
+                        <a href="dashboard.php" class="btn btn-primary"
+                            style="display: flex; width: 100%; justify-content: center; background: transparent; border: 1px solid var(--clr-primary);">
+                            Dashboard (<?= $zobrazene_jmeno ?>)
+                        </a>
+                        <a href="auth/logout.php" class="btn btn-secondary"
+                            style="display: flex; width: 100%; justify-content: center;">Log out</a>
+                    <?php else: ?>
+                        <a href="login.php" class="btn btn-secondary"
+                            style="display: flex; width: 100%; justify-content: center;">Log in</a>
+                        <a href="register.php" class="btn btn-primary"
+                            style="display: flex; width: 100%; justify-content: center;">Get Started</a>
+                    <?php endif; ?>
                 </div>
             </div>
         </header>

@@ -4,7 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 session_start();
-require '../config/db.php'; 
+require '../config/db.php';
 
 // ... zbytek kódu
 
@@ -15,8 +15,8 @@ if (!isset($_SESSION['user_id'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = $_SESSION['user_id'];
     $plan_name = $_POST['plan_name'];
-    $plan_price = (float)$_POST['plan_price'];
-    $plan_days = (int)$_POST['plan_days']; // Na kolik dní se to pronajímá
+    $plan_price = (float) $_POST['plan_price'];
+    $plan_days = (int) $_POST['plan_days']; // Na kolik dní se to pronajímá
 
     try {
         // Zabezpečíme to transakcí, aby se neudělalo jen půlka věcí
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // datum_konce_plan vypočítáme podle počtu dnů plánu
         $datum_zacatku = date('Y-m-d H:i:s');
         $datum_konce_plan = date('Y-m-d H:i:s', strtotime("+$plan_days days"));
-        
+
         $stmt_pronajem = $pdo->prepare("
             INSERT INTO PRONAJMY 
             (datum_zacatku, datum_konce_plan, celkova_cena, stav_pronajmu, UZIVATELE_id_osoba, KONZOLE_id_konzole, PREDPLATNE_id_predplatne) 

@@ -16,6 +16,7 @@ $zobrazene_jmeno = ($user['jmeno'] === 'Nezadáno') ? explode('@', $user['email'
 ?>
 <!DOCTYPE html>
 <html lang="cs">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,10 +31,11 @@ $zobrazene_jmeno = ($user['jmeno'] === 'Nezadáno') ? explode('@', $user['email'
     <link rel="icon" href="img/logo.svg">
     <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.5/dist/dotlottie-wc.js" type="module"></script>
 </head>
+
 <body>
     <div class="background-container">
         <div class="background-hero-pattern" style="max-height: 500px;"></div>
-        
+
         <header class="header-container scrolled" id="header">
             <div class="header container">
                 <div class="header-wrapper">
@@ -51,10 +53,11 @@ $zobrazene_jmeno = ($user['jmeno'] === 'Nezadáno') ? explode('@', $user['email'
                         <li class="header-link"><a href="index.php">Home</a></li>
                         <li class="header-link"><a href="pricing.php">Pricing</a></li>
                         <li class="header-link"><a href="contact.php">Contact</a></li>
-                            <li class="header-link"><a href="dashboard.php">Dashboard</a></li>
+                        <li class="header-link"><a href="dashboard.php">Dashboard</a></li>
                     </ul>
                     <div class="header-actions-wrapper">
-                        <a href="profile.php" style="color: var(--clr-primary); font-weight: 500; margin-right: 15px; text-decoration: none;">
+                        <a href="profile.php"
+                            style="color: var(--clr-primary); font-weight: 500; margin-right: 15px; text-decoration: none;">
                             Hello, <?= $zobrazene_jmeno ?>!
                         </a>
                         <a href="auth/logout.php" class="btn btn-secondary">Log out</a>
@@ -65,11 +68,13 @@ $zobrazene_jmeno = ($user['jmeno'] === 'Nezadáno') ? explode('@', $user['email'
 
         <div class="content" style="margin-top: 140px;">
             <section class="container" style="max-width: 600px; margin-inline: auto;">
-                <h2 class="hero-text" style="font-size: 40px; margin-bottom: 32px; text-align: center;">Account <span class="hero-gradient">Settings</span></h2>
-                
+                <h2 class="hero-text" style="font-size: 40px; margin-bottom: 32px; text-align: center;">Account <span
+                        class="hero-gradient">Settings</span></h2>
+
                 <div class="contact-info-card">
                     <?php if (isset($_SESSION['success'])): ?>
-                        <div style="background: rgba(76, 175, 80, 0.1); border: 1px solid #4CAF50; color: white; padding: 12px; border-radius: 8px; margin-bottom: 24px; text-align: center;">
+                        <div
+                            style="background: rgba(76, 175, 80, 0.1); border: 1px solid #4CAF50; color: white; padding: 12px; border-radius: 8px; margin-bottom: 24px; text-align: center;">
                             <?= htmlspecialchars($_SESSION['success']) ?>
                         </div>
                         <?php unset($_SESSION['success']); ?>
@@ -79,41 +84,53 @@ $zobrazene_jmeno = ($user['jmeno'] === 'Nezadáno') ? explode('@', $user['email'
                         <div style="display: flex; gap: 16px;">
                             <div class="form-group" style="flex: 1;">
                                 <label class="form-label">First Name</label>
-                                <input type="text" name="jmeno" class="form-input" value="<?= htmlspecialchars($user['jmeno'] == 'Nezadáno' ? '' : $user['jmeno']) ?>" required>
+                                <input type="text" name="jmeno" class="form-input"
+                                    value="<?= htmlspecialchars($user['jmeno'] == 'Nezadáno' ? '' : $user['jmeno']) ?>"
+                                    required>
                             </div>
                             <div class="form-group" style="flex: 1;">
                                 <label class="form-label">Last Name</label>
-                                <input type="text" name="prijmeni" class="form-input" value="<?= htmlspecialchars($user['prijmeni'] == 'Nezadáno' ? '' : $user['prijmeni']) ?>" required>
+                                <input type="text" name="prijmeni" class="form-input"
+                                    value="<?= htmlspecialchars($user['prijmeni'] == 'Nezadáno' ? '' : $user['prijmeni']) ?>"
+                                    required>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">Email (Cannot be changed)</label>
-                            <input type="email" class="form-input" value="<?= htmlspecialchars($user['email']) ?>" disabled style="opacity: 0.5;">
+                            <input type="email" class="form-input" value="<?= htmlspecialchars($user['email']) ?>"
+                                disabled style="opacity: 0.5;">
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">Phone Number</label>
-                            <input type="text" name="telefon" class="form-input" value="<?= htmlspecialchars($user['telefon'] == '000000000' ? '' : $user['telefon']) ?>" maxlength="12">
+                            <input type="text" name="telefon" class="form-input"
+                                value="<?= htmlspecialchars($user['telefon'] == '000000000' ? '' : $user['telefon']) ?>"
+                                maxlength="12">
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">Street Address</label>
-                            <input type="text" name="adresa_ulice" class="form-input" value="<?= htmlspecialchars($user['adresa_ulice'] == 'Nezadáno' ? '' : $user['adresa_ulice']) ?>">
+                            <input type="text" name="adresa_ulice" class="form-input"
+                                value="<?= htmlspecialchars($user['adresa_ulice'] == 'Nezadáno' ? '' : $user['adresa_ulice']) ?>">
                         </div>
 
                         <div style="display: flex; gap: 16px;">
                             <div class="form-group" style="flex: 2;">
                                 <label class="form-label">City</label>
-                                <input type="text" name="adresa_mesto" class="form-input" value="<?= htmlspecialchars($user['adresa_mesto'] == 'Nezadáno' ? '' : $user['adresa_mesto']) ?>">
+                                <input type="text" name="adresa_mesto" class="form-input"
+                                    value="<?= htmlspecialchars($user['adresa_mesto'] == 'Nezadáno' ? '' : $user['adresa_mesto']) ?>">
                             </div>
                             <div class="form-group" style="flex: 1;">
                                 <label class="form-label">ZIP Code</label>
-                                <input type="text" name="adresa_psc" class="form-input" value="<?= htmlspecialchars($user['adresa_psc'] == '00000' ? '' : $user['adresa_psc']) ?>" maxlength="10">
+                                <input type="text" name="adresa_psc" class="form-input"
+                                    value="<?= htmlspecialchars($user['adresa_psc'] == '00000' ? '' : $user['adresa_psc']) ?>"
+                                    maxlength="10">
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 16px;">
+                        <button type="submit" class="btn btn-primary"
+                            style="width: 100%; justify-content: center; margin-top: 16px;">
                             Save Changes
                         </button>
                     </form>
@@ -196,4 +213,5 @@ $zobrazene_jmeno = ($user['jmeno'] === 'Nezadáno') ? explode('@', $user['email'
         </div>
     </div>
 </body>
+
 </html>

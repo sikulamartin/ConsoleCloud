@@ -1,11 +1,12 @@
 <?php
 session_start();
 require '../vendor/autoload.php';
+require '../config/secrets.php'; // Načtení našich tajných klíčů
 
-// SEM VLOŽ SVÉ ÚDAJE Z GOOGLE CLOUD CONSOLE
-$clientID = '340250586116-pjobkmr668gqn3cbfvq3ku8q3lc5n0hu.apps.googleusercontent.com';
-$clientSecret = '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';
+$clientID = GOOGLE_CLIENT_ID;
+$clientSecret = GOOGLE_CLIENT_SECRET;
 $redirectUri = 'http://localhost/consolecloud/auth/google_callback.php';
+
 
 // Inicializace Google Klienta
 $client = new Google_Client();

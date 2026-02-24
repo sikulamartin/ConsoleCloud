@@ -62,14 +62,15 @@
 
             <form action="auth/login_process.php" method="POST">
                 <?php if (isset($_SESSION['error'])): ?>
-    <div style="background: rgba(227, 30, 36, 0.1); border: 1px solid var(--clr-primary); color: white; padding: 12px; border-radius: 8px; margin-bottom: 24px; text-align: center; font-family: 'Roboto', sans-serif;">
-        <?= htmlspecialchars($_SESSION['error']) ?>
-    </div>
-    <?php unset($_SESSION['error']); ?>
-<?php endif; ?>
+                    <div
+                        style="background: rgba(227, 30, 36, 0.1); border: 1px solid var(--clr-primary); color: white; padding: 12px; border-radius: 8px; margin-bottom: 24px; text-align: center; font-family: 'Roboto', sans-serif;">
+                        <?= htmlspecialchars($_SESSION['error']) ?>
+                    </div>
+                    <?php unset($_SESSION['error']); ?>
+                <?php endif; ?>
                 <div class="form-group">
                     <label class="form-label">Email</label>
-                    <input type="email" name="email"class="form-input" placeholder="john.doe@gmail.com">
+                    <input type="email" name="email" class="form-input" placeholder="john.doe@gmail.com">
                 </div>
 
                 <div class="form-group">

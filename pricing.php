@@ -9,7 +9,7 @@ if (isset($_SESSION['user_id'])) {
     $stmt = $pdo->prepare("SELECT jmeno, email FROM OSOBY WHERE id_osoba = ?");
     $stmt->execute([$_SESSION['user_id']]);
     $prihlaseny_uzivatel = $stmt->fetch();
-    
+
     if ($prihlaseny_uzivatel) {
         if ($prihlaseny_uzivatel['jmeno'] === 'Nezadáno') {
             $zobrazene_jmeno = explode('@', $prihlaseny_uzivatel['email'])[0];
@@ -30,32 +30,71 @@ if (isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="styles/responsive.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
     <link rel="icon" href="img/logo.svg">
     <style>
         /* Styl pro falešnou platební bránu */
         .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); backdrop-filter: blur(5px);
-            display: none; justify-content: center; align-items: center; z-index: 1000;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
         }
+
         .payment-modal {
-            background: #111; border: 1px solid var(--clr-primary); border-radius: 12px;
-            padding: 32px; width: 100%; max-width: 400px; color: white;
+            background: #111;
+            border: 1px solid var(--clr-primary);
+            border-radius: 12px;
+            padding: 32px;
+            width: 100%;
+            max-width: 400px;
+            color: white;
             box-shadow: 0 10px 40px rgba(142, 22, 22, 0.3);
         }
-        .payment-modal h3 { margin-bottom: 24px; font-size: 24px; text-align: center; }
+
+        .payment-modal h3 {
+            margin-bottom: 24px;
+            font-size: 24px;
+            text-align: center;
+        }
+
         .payment-input {
-            width: 100%; padding: 12px; background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1); border-radius: 8px;
-            color: white; margin-bottom: 16px; font-family: "Roboto", sans-serif;
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            margin-bottom: 16px;
+            font-family: "Roboto", sans-serif;
         }
-        .payment-row { display: flex; gap: 16px; }
+
+        .payment-row {
+            display: flex;
+            gap: 16px;
+        }
+
         .close-modal {
-            text-align: center; margin-top: 16px; color: #858891; 
-            cursor: pointer; font-size: 14px; transition: color 0.3s;
+            text-align: center;
+            margin-top: 16px;
+            color: #858891;
+            cursor: pointer;
+            font-size: 14px;
+            transition: color 0.3s;
         }
-        .close-modal:hover { color: white; }
+
+        .close-modal:hover {
+            color: white;
+        }
     </style>
 </head>
 
@@ -83,7 +122,8 @@ if (isset($_SESSION['user_id'])) {
                     </ul>
                     <div class="header-actions-wrapper">
                         <?php if ($prihlaseny_uzivatel): ?>
-                            <a href="dashboard.php" style="color: var(--clr-primary); font-weight: 500; margin-right: 15px; text-decoration: none;">
+                            <a href="dashboard.php"
+                                style="color: var(--clr-primary); font-weight: 500; margin-right: 15px; text-decoration: none;">
                                 Hello, <?= $zobrazene_jmeno ?>!
                             </a>
                             <a href="auth/logout.php" class="btn btn-secondary">Log out</a>
@@ -106,11 +146,15 @@ if (isset($_SESSION['user_id'])) {
                 </nav>
                 <div class="mobile-actions">
                     <?php if ($prihlaseny_uzivatel): ?>
-                        <a href="dashboard.php" class="btn btn-primary" style="display: flex; width: 100%; justify-content: center; background: transparent; border: 1px solid var(--clr-primary);">Dashboard</a>
-                        <a href="auth/logout.php" class="btn btn-secondary" style="display: flex; width: 100%; justify-content: center;">Log out</a>
+                        <a href="dashboard.php" class="btn btn-primary"
+                            style="display: flex; width: 100%; justify-content: center; background: transparent; border: 1px solid var(--clr-primary);">Dashboard</a>
+                        <a href="auth/logout.php" class="btn btn-secondary"
+                            style="display: flex; width: 100%; justify-content: center;">Log out</a>
                     <?php else: ?>
-                        <a href="login.php" class="btn btn-secondary" style="display: flex; width: 100%; justify-content: center;">Log in</a>
-                        <a href="register.php" class="btn btn-primary" style="display: flex; width: 100%; justify-content: center;">Get Started</a>
+                        <a href="login.php" class="btn btn-secondary"
+                            style="display: flex; width: 100%; justify-content: center;">Log in</a>
+                        <a href="register.php" class="btn btn-primary"
+                            style="display: flex; width: 100%; justify-content: center;">Get Started</a>
                     <?php endif; ?>
                 </div>
             </div>
@@ -132,9 +176,11 @@ if (isset($_SESSION['user_id'])) {
                             <li>Cancel after 24h</li>
                         </ul>
                         <?php if ($prihlaseny_uzivatel): ?>
-                            <button class="btn-primary" style="width: 100%; justify-content: center;" onclick="openPayment('Hourly', 0.23, 1)">Start renting</button>
+                            <button class="btn-primary" style="width: 100%; justify-content: center;"
+                                onclick="openPayment('Hourly', 0.23, 1)">Start renting</button>
                         <?php else: ?>
-                            <a href="login.php" class="btn-primary" style="display: flex; width: 100%; justify-content: center;">Log in to rent</a>
+                            <a href="login.php" class="btn-primary"
+                                style="display: flex; width: 100%; justify-content: center;">Log in to rent</a>
                         <?php endif; ?>
                     </div>
 
@@ -149,9 +195,11 @@ if (isset($_SESSION['user_id'])) {
                             <li>Pay in advance ($31.92)</li>
                         </ul>
                         <?php if ($prihlaseny_uzivatel): ?>
-                            <button class="btn-primary" style="width: 100%; justify-content: center;" onclick="openPayment('Weekly', 31.92, 7)">Start renting</button>
+                            <button class="btn-primary" style="width: 100%; justify-content: center;"
+                                onclick="openPayment('Weekly', 31.92, 7)">Start renting</button>
                         <?php else: ?>
-                            <a href="login.php" class="btn-primary" style="display: flex; width: 100%; justify-content: center;">Log in to rent</a>
+                            <a href="login.php" class="btn-primary"
+                                style="display: flex; width: 100%; justify-content: center;">Log in to rent</a>
                         <?php endif; ?>
                     </div>
 
@@ -166,9 +214,11 @@ if (isset($_SESSION['user_id'])) {
                             <li>Pay in advance ($115.20)</li>
                         </ul>
                         <?php if ($prihlaseny_uzivatel): ?>
-                            <button class="btn-primary" style="width: 100%; justify-content: center;" onclick="openPayment('Monthly', 115.20, 30)">Start renting</button>
+                            <button class="btn-primary" style="width: 100%; justify-content: center;"
+                                onclick="openPayment('Monthly', 115.20, 30)">Start renting</button>
                         <?php else: ?>
-                            <a href="login.php" class="btn-primary" style="display: flex; width: 100%; justify-content: center;">Log in to rent</a>
+                            <a href="login.php" class="btn-primary"
+                                style="display: flex; width: 100%; justify-content: center;">Log in to rent</a>
                         <?php endif; ?>
                     </div>
 
@@ -182,7 +232,8 @@ if (isset($_SESSION['user_id'])) {
                             <li>Dedicated hardware</li>
                             <li>24/7 Support</li>
                         </ul>
-                        <a href="contact.php" class="btn-primary" style="display: flex; width: 100%; justify-content: center;">Contact sales</a>
+                        <a href="contact.php" class="btn-primary"
+                            style="display: flex; width: 100%; justify-content: center;">Contact sales</a>
                     </div>
                 </div>
             </section>
@@ -266,21 +317,25 @@ if (isset($_SESSION['user_id'])) {
     <div class="modal-overlay" id="paymentModal">
         <div class="payment-modal">
             <h3>Secure Checkout</h3>
-            <p style="text-align: center; color: #858891; margin-bottom: 24px;">Selected Plan: <strong id="planNameDisplay" style="color: white;"></strong> - <strong id="planPriceDisplay" style="color: var(--clr-primary);"></strong></p>
-            
+            <p style="text-align: center; color: #858891; margin-bottom: 24px;">Selected Plan: <strong
+                    id="planNameDisplay" style="color: white;"></strong> - <strong id="planPriceDisplay"
+                    style="color: var(--clr-primary);"></strong></p>
+
             <form action="actions/process_payment.php" method="POST">
                 <input type="hidden" name="plan_name" id="planNameInput">
                 <input type="hidden" name="plan_price" id="planPriceInput">
                 <input type="hidden" name="plan_days" id="planDaysInput">
 
                 <input type="text" class="payment-input" placeholder="Cardholder Name" required value="John Doe">
-                <input type="text" class="payment-input" placeholder="Card Number (Fake)" required value="4532 1123 8976 5432" maxlength="19">
+                <input type="text" class="payment-input" placeholder="Card Number (Fake)" required
+                    value="4532 1123 8976 5432" maxlength="19">
                 <div class="payment-row">
                     <input type="text" class="payment-input" placeholder="MM/YY" required value="12/26" maxlength="5">
                     <input type="text" class="payment-input" placeholder="CVC" required value="123" maxlength="3">
                 </div>
-                
-                <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 8px;">
+
+                <button type="submit" class="btn-primary"
+                    style="width: 100%; justify-content: center; margin-top: 8px;">
                     Pay & Rent Console
                 </button>
             </form>
@@ -294,7 +349,7 @@ if (isset($_SESSION['user_id'])) {
             document.getElementById('paymentModal').style.display = 'flex';
             document.getElementById('planNameDisplay').innerText = planName;
             document.getElementById('planPriceDisplay').innerText = '$' + price;
-            
+
             document.getElementById('planNameInput').value = planName;
             document.getElementById('planPriceInput').value = price;
             document.getElementById('planDaysInput').value = days;
@@ -305,4 +360,5 @@ if (isset($_SESSION['user_id'])) {
         }
     </script>
 </body>
+
 </html>

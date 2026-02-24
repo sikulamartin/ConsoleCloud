@@ -2,11 +2,12 @@
 session_start();
 require '../config/db.php';
 require '../vendor/autoload.php';
+require '../config/secrets.php';
 
-// SEM VLOŽ STEJNÉ ÚDAJE JAKO V PŘEDCHOZÍM KROKU
-$clientID = '340250586116-pjobkmr668gqn3cbfvq3ku8q3lc5n0hu.apps.googleusercontent.com';
-$clientSecret = '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';
+$clientID = GOOGLE_CLIENT_ID;
+$clientSecret = GOOGLE_CLIENT_SECRET;
 $redirectUri = 'http://localhost/consolecloud/auth/google_callback.php';
+
 
 $client = new Google_Client();
 $client->setClientId($clientID);
@@ -16,17 +17,17 @@ $client->setRedirectUri($redirectUri);
 // Pokud se uživatel úspěšně vrátil z Googlu s kódem
 if (isset($_GET['code'])) {
     $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
-    
+
     if (isset($token['error'])) {
         die("Chyba při získávání tokenu z Googlu.");
     }
-    
+
     $client->setAccessToken($token['access_token']);
 
     // Získání informací o profilu uživatele
     $google_oauth = new Google_Service_Oauth2($client);
     $google_account_info = $google_oauth->userinfo->get();
-    
+
     $google_id = $google_account_info->id;
     $email = $google_account_info->email;
     $jmeno = $google_account_info->givenName ?: 'Nezadáno';
@@ -43,7 +44,7 @@ if (isset($_GET['code'])) {
             // Pokud měl dřív účet jen přes heslo, updatneme mu tam google_id, ať ho má propojený
             $stmt_update = $pdo->prepare("UPDATE OSOBY SET google_id = ? WHERE id_osoba = ?");
             $stmt_update->execute([$google_id, $user['id_osoba']]);
-            
+
             $_SESSION['user_id'] = $user['id_osoba'];
         } else {
             // Uživatel neexistuje -> Automaticky ho zaregistrujeme

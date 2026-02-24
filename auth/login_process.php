@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Uživatelé z Googlu nemusí mít heslo, proto kontrolujeme, zda hash vůbec existuje
         if ($user && $user['password_hash'] && password_verify($password, $user['password_hash'])) {
             $_SESSION['user_id'] = $user['id_osoba'];
-            header("Location: ../index.php"); 
+            header("Location: ../index.php");
             exit;
         } else {
             $_SESSION['error'] = "Nesprávný e-mail nebo heslo. (Pokud jste se registrovali přes Google, použijte Google přihlášení).";

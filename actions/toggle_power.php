@@ -8,14 +8,14 @@ if (!isset($_SESSION['user_id'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = $_SESSION['user_id'];
-    $id_pronajem = (int)$_POST['id_pronajem'];
-    $new_state = (int)$_POST['new_state'];
+    $id_pronajem = (int) $_POST['id_pronajem'];
+    $new_state = (int) $_POST['new_state'];
 
     try {
         // Zkontrolujeme, zda tento pronájem skutečně patří přihlášenému uživateli (bezpečnost!)
         $stmt_check = $pdo->prepare("SELECT id_pronajem FROM PRONAJMY WHERE id_pronajem = ? AND UZIVATELE_id_osoba = ?");
         $stmt_check->execute([$id_pronajem, $user_id]);
-        
+
         if ($stmt_check->rowCount() > 0) {
             // Pokud ano, přepneme stav
             $stmt_update = $pdo->prepare("UPDATE PRONAJMY SET power_state = ? WHERE id_pronajem = ?");
