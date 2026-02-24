@@ -1,0 +1,248 @@
+@media (min-height: 2000px) {
+  .background-hero-pattern {
+    display: none;
+  }
+}
+
+@media (max-width: 1400px) {
+  .how-bg-img {
+    display: none;
+  }
+  .how-it-works-contnt {
+    position: relative !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  .pricing-cards-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .burger-menu-btn {
+    display: flex !important;
+  }
+  .header-actions-wrapper {
+    display: none;
+  }
+  .header-links-wrapper {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .desktop-nav {
+    display: none;
+  }
+  .header-wrapper {
+    padding: 12px 0;
+  }
+  .hero-container {
+    margin-top: 124px;
+  }
+
+  .pricing-cards-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .content {
+    gap: 56px;
+  }
+  .marquee-content {
+    gap: 32px;
+  }
+  .marquee-content img {
+    height: 50px;
+  }
+  .how-it-works-contnt .hero-text,
+  .pricing-container .hero-text {
+    font-size: 38px;
+  }
+  .how-it-works-section .info-box {
+    margin-top: 0;
+  }
+  .how-it-works-contnt {
+    padding-bottom: 0px;
+  }
+  .pricing-cards-wrapper {
+    margin-top: 24px;
+  }
+}
+
+@media (max-width: 968px) {
+  .faq-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .faq-title {
+    font-size: 48px;
+  }
+  .auth-container {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+  }
+
+  .auth-left {
+    display: none;
+  }
+
+  .auth-right {
+    padding: 40px 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-text {
+    font-size: 48px;
+    margin-top: 32px;
+  }
+  .pricing-cards-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-container {
+    padding: 60px 0;
+  }
+
+  .pricing-card {
+    padding: 24px 20px;
+  }
+
+  .price {
+    font-size: 40px;
+  }
+  .pricing-card {
+    gap: 16px;
+  }
+  .hero-container {
+    margin-top: 92px;
+  }
+  .how-steps-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .how-it-works-section {
+    padding: 60px 20px;
+  }
+  .hero-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .hero-btn-subinfo-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 0px;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .brand-col {
+    grid-column: 1 / -1;
+  }
+
+  .faq-container {
+    grid-template-columns: 1fr;
+  }
+
+  .faq-left {
+    padding: 32px;
+    text-align: center;
+  }
+
+  .how-it-works-contnt {
+    position: relative;
+  }
+
+  .how-bg-img {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .faq-section {
+    padding: 60px 20px;
+  }
+
+  .faq-title {
+    font-size: 36px;
+  }
+
+  .faq-question {
+    font-size: 15px;
+    padding: 20px 20px;
+  }
+
+  .faq-answer {
+    margin: 0 20px 20px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
+  .header-logo-text {
+    display: none;
+  }
+  .hero-text {
+    font-size: 38px;
+    letter-spacing: -1px;
+  }
+
+  .hero-subtext {
+    font-size: 14px;
+    padding: 0 10px;
+  }
+  .hero-btn-subinfo {
+    margin-top: 16px;
+  }
+  .hero-container .btn-primary {
+    font-size: 16px;
+    padding: 16px 20px;
+  }
+  .pricing-cards-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .brand-col {
+    align-items: center;
+  }
+  .auth-right {
+    padding: 32px 24px;
+  }
+
+  .auth-form-title {
+    font-size: 32px;
+  }
+  .footer-desc {
+    margin: 16px auto 0;
+  }
+
+  .header-logo-text {
+    font-size: 22px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .marquee {
+    margin: 40px 0;
+  }
+
+  .info-box {
+    font-size: 14px;
+    padding: 8px 16px;
+    max-width: 100%;
+  }
+}
