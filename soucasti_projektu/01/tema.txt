@@ -1,0 +1,7 @@
+Aplikace pro online pronájem konzolí (ConsoleCloud)
+
+ConsoleCloud je webová aplikace pro online pronájem herních konzolí. Uživatelům umožňuje dočasně využívat výkonnou konzoli pro hraní exkluzivních nebo hardwarově náročných her.
+
+Aplikace funguje jako e-shop, kde si uživatel vybere konzoli a délku pronájmu. Součástí systému je registrace, přihlášení a správa uživatelského účtu. Po dobu pronájmu může uživatel konzoli vzdáleně zapínat a vypínat.
+
+Přihlášení je možné také pomocí účtu Google prostřednictvím OAuth 2.0 API od společnosti Google.

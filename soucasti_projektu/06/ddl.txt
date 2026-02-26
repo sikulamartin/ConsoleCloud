@@ -1,0 +1,138 @@
+-- 1. ZÁKLADNÍ TABULKY (bez cizích klíčů)
+CREATE TABLE DATACENTRA (
+    id_datacentrum INT AUTO_INCREMENT PRIMARY KEY,
+    nazev          VARCHAR(50) NOT NULL,
+    lokalita_zeme  VARCHAR(50) NOT NULL,
+    lokalita_mesto VARCHAR(50) NOT NULL,
+    kapacita       INT NOT NULL,
+    kontakt_spravce CHAR(12) NOT NULL,
+    CONSTRAINT CHK_DATACENTRUM_KAPACITA CHECK (kapacita > 0)
+);
+
+CREATE TABLE HRY (
+    id_hra    INT AUTO_INCREMENT PRIMARY KEY,
+    nazev     VARCHAR(50) NOT NULL,
+    zanr      VARCHAR(50) NOT NULL,
+    vydavatel VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE TYPY_KONZOLI (
+    id_typ     INT AUTO_INCREMENT PRIMARY KEY,
+    vyrobce    VARCHAR(50) NOT NULL,
+    model      VARCHAR(100) NOT NULL,
+    vykon_info VARCHAR(250)
+);
+
+CREATE TABLE OSOBY (
+    id_osoba      INT AUTO_INCREMENT PRIMARY KEY,
+    jmeno         VARCHAR(50) NOT NULL,
+    prijmeni      VARCHAR(50) NOT NULL,
+    email         VARCHAR(100) NOT NULL UNIQUE,
+    telefon       CHAR(12) NOT NULL,
+    adresa_ulice  VARCHAR(100) NOT NULL,
+    adresa_mesto  VARCHAR(50) NOT NULL,
+    adresa_psc    CHAR(10) NOT NULL,
+    google_id     VARCHAR(255) UNIQUE,
+    password_hash VARCHAR(255)
+);
+
+CREATE TABLE PREDPLATNE (
+    id_predplatne INT AUTO_INCREMENT PRIMARY KEY,
+    nazev         VARCHAR(20) NOT NULL,
+    cena          DECIMAL(10, 2) NOT NULL,
+    delka_planu   INT NOT NULL,
+    CONSTRAINT CHK_PREDPLATNE_CENA CHECK (cena >= 0)
+);
+
+
+-- 2. TABULKY PRVNÍ ÚROVNĚ ZÁVISLOSTI
+CREATE TABLE KOMPATIBILITA (
+    TYP_KONZOLE_id_typ INT NOT NULL,
+    HRA_id_hra         INT NOT NULL,
+    PRIMARY KEY (TYP_KONZOLE_id_typ, HRA_id_hra),
+    CONSTRAINT KOMPATIBILITA_TYP_FK FOREIGN KEY (TYP_KONZOLE_id_typ) REFERENCES TYPY_KONZOLI (id_typ),
+    CONSTRAINT KOMPATIBILITA_HRA_FK FOREIGN KEY (HRA_id_hra) REFERENCES HRY (id_hra)
+);
+
+CREATE TABLE KONZOLE (
+    id_konzole                INT AUTO_INCREMENT PRIMARY KEY,
+    seriove_cislo             VARCHAR(50) NOT NULL,
+    stav                      VARCHAR(20) NOT NULL,
+    datum_porizeni            DATE NOT NULL,
+    DATACENTRA_id_datacentrum INT NOT NULL,
+    TYPY_KONZOLI_id_typ       INT NOT NULL,
+    CONSTRAINT KONZOLE_DATACENTRA_FK FOREIGN KEY (DATACENTRA_id_datacentrum) REFERENCES DATACENTRA (id_datacentrum),
+    CONSTRAINT KONZOLE_TYPY_KONZOLI_FK FOREIGN KEY (TYPY_KONZOLI_id_typ) REFERENCES TYPY_KONZOLI (id_typ),
+    CONSTRAINT CHK_KONZOLE_STAV CHECK (stav IN ('DOSTUPNA', 'OBSAZENA', 'SERVIS', 'VYRAZENA'))
+);
+
+CREATE TABLE UZIVATELE (
+    id_osoba          INT PRIMARY KEY,
+    datum_registrace  DATETIME NOT NULL,
+    preferovany_jazyk VARCHAR(5),
+    CONSTRAINT UZIVATEL_OSOBA_FK FOREIGN KEY (id_osoba) REFERENCES OSOBY (id_osoba)
+);
+
+CREATE TABLE ZAMESTNANCI (
+    id_osoba      INT PRIMARY KEY,
+    datum_nastupu DATE NOT NULL,
+    pozice        VARCHAR(50) NOT NULL,
+    plat          DECIMAL(10, 2) NOT NULL,
+    CONSTRAINT ZAMESTNANEC_OSOBA_FK FOREIGN KEY (id_osoba) REFERENCES OSOBY (id_osoba),
+    CONSTRAINT CHK_ZAMESTNANEC_PLAT CHECK (plat > 0)
+);
+
+
+-- 3. TABULKY DRUHÉ ÚROVNĚ ZÁVISLOSTI (Transakce a procesy)
+CREATE TABLE PRONAJMY (
+    id_pronajem              INT AUTO_INCREMENT PRIMARY KEY,
+    datum_zacatku            DATETIME NOT NULL,
+    datum_konce_plan         DATETIME NOT NULL,
+    datum_konce_real         DATETIME,
+    celkova_cena             DECIMAL(10, 2) NOT NULL,
+    stav_pronajmu            VARCHAR(20) NOT NULL,
+    UZIVATELE_id_osoba       INT NOT NULL,
+    KONZOLE_id_konzole       INT NOT NULL,
+    PREDPLATNE_id_predplatne INT NOT NULL,
+    CONSTRAINT PRONAJMY_UZIVATELE_FK FOREIGN KEY (UZIVATELE_id_osoba) REFERENCES UZIVATELE (id_osoba),
+    CONSTRAINT PRONAJMY_KONZOLE_FK FOREIGN KEY (KONZOLE_id_konzole) REFERENCES KONZOLE (id_konzole),
+    CONSTRAINT PRONAJMY_PREDPLATNE_FK FOREIGN KEY (PREDPLATNE_id_predplatne) REFERENCES PREDPLATNE (id_predplatne),
+    CONSTRAINT CHK_PRONAJEM_DATA CHECK (datum_konce_plan > datum_zacatku),
+    CONSTRAINT CHK_PRONAJEM_STAV CHECK (stav_pronajmu IN ('VYTVORENO', 'ZAPLACENO', 'AKTIVNI', 'UKONCENO', 'STORNO'))
+);
+
+CREATE TABLE TICKETY (
+    id_ticket            INT AUTO_INCREMENT PRIMARY KEY,
+    predmet              VARCHAR(100) NOT NULL,
+    popis                VARCHAR(500) NOT NULL,
+    datum_vytvoreni      DATETIME NOT NULL,
+    stav                 VARCHAR(20) NOT NULL,
+    priorita             INT NOT NULL,
+    UZIVATELE_id_osoba   INT NOT NULL,
+    ZAMESTNANCI_id_osoba INT,
+    CONSTRAINT TICKETY_UZIVATELE_FK FOREIGN KEY (UZIVATELE_id_osoba) REFERENCES UZIVATELE (id_osoba),
+    CONSTRAINT TICKETY_ZAMESTNANCI_FK FOREIGN KEY (ZAMESTNANCI_id_osoba) REFERENCES ZAMESTNANCI (id_osoba),
+    CONSTRAINT CHK_TICKET_STAV CHECK (stav IN ('NOVY', 'RESI_SE', 'CEKA_NA_ODPOVED', 'VYRESEN', 'UZAVREN')),
+    CONSTRAINT CHK_TICKET_PRIORITA CHECK (priorita BETWEEN 1 AND 5)
+);
+
+
+-- 4. TABULKY TŘETÍ ÚROVNĚ ZÁVISLOSTI (Detaily k pronájmům)
+CREATE TABLE HERNI_SEZENI (
+    id_sezeni            INT AUTO_INCREMENT PRIMARY KEY,
+    cas_pripojeni        DATETIME NOT NULL,
+    cas_odpojeni         DATETIME NOT NULL,
+    latence_ms           INT,
+    PRONAJMY_id_pronajem INT NOT NULL,
+    CONSTRAINT HERNI_SESSIONS_PRONAJMY_FK FOREIGN KEY (PRONAJMY_id_pronajem) REFERENCES PRONAJMY (id_pronajem)
+);
+
+CREATE TABLE PLATBY (
+    id_platba            INT AUTO_INCREMENT PRIMARY KEY,
+    datum                DATETIME NOT NULL,
+    castka               DECIMAL(10, 2) NOT NULL,
+    metoda               VARCHAR(30) NOT NULL,
+    PRONAJMY_id_pronajem INT NOT NULL,
+    CONSTRAINT PLATBY_PRONAJMY_FK FOREIGN KEY (PRONAJMY_id_pronajem) REFERENCES PRONAJMY (id_pronajem),
+    CONSTRAINT CHK_PLATBA_CASTKA CHECK (castka > 0)
+);

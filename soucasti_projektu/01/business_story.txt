@@ -1,0 +1,11 @@
+Business Story: ConsoleCloud – Cloudové hraní bez bariér
+Zamyšlení nad problémem
+V dnešní době je herní průmysl na historickém maximu, avšak finanční bariéra vstupu pro běžné či občasné hráče neustále roste. Pořízení nejnovější generace herních konzolí (jako je PlayStation 5 nebo Xbox Series X) představuje vysokou jednorázovou investici. K tomu se přidává nutnost hardwarové údržby, řešení reklamací a fakt, že fyzický hardware po několika letech nevyhnutelně technologicky zastarává. Existuje obrovská skupina lidí – studenti, občasní hráči, uživatelé Maců nebo lidé často cestující – kteří si chtějí zahrát exkluzivní herní tituly, ale nechce se jim investovat do drahého "železa", na které bude většinu měsíce jen padat prach.
+
+Popis byznysu a naše řešení
+Projekt ConsoleCloud tento problém řeší transformací herního hardwaru na dostupnou službu (Hardware as a Service). Náš byznys model spočívá v centralizovaném nákupu a správě fyzických herních konzolí, které jsou bezpečně umístěny v páteřních datacentrech s vysokorychlostním internetem (aktuálně v lokalitách Praha-East a Frankfurt-Main). Tyto konzole následně pronajímáme koncovým zákazníkům prostřednictvím naší plně automatizované webové platformy.
+
+Zákazník si na webu jednoduše vybere požadovaný hardware a zvolí si flexibilní model předplatného – od hodinového pronájmu (ideální pro víkendové vyzkoušení konkrétní hry), přes týdenní, až po výhodný měsíční tarif. Systém automaticky najde volnou konzoli v databázi, uzamkne ji pro daného uživatele a zpřístupní mu ji v uživatelském rozhraní (Dashboardu). Zde může zákazník svou pronajatou konzoli vzdáleně zapínat a vypínat.
+
+Přidaná hodnota pro zákazníka
+Samotný herní zážitek probíhá formou streamování obrazu a zvuku z našeho datacentra s minimální latencí přímo na koncové zařízení uživatele. Zákazník tak může hrát nejnáročnější konzolové hry i na starém kancelářském notebooku, tabletu nebo chytré televizi. ConsoleCloud odstraňuje nutnost vlastnit hardware, čekat na zdlouhavé stahování her či aktualizací a demokratizuje přístup k high-end hraní. Platíte pouze za čas, kdy reálně hrajete, o všechnu údržbu a infrastrukturu se staráme my.
