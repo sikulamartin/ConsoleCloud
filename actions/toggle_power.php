@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $new_state = (int) $_POST['new_state'];
 
     try {
-        // Zkontrolujeme, zda tento pronájem skutečně patří přihlášenému uživateli (bezpečnost!)
+        // Zkontrolujeme, zda tento pronájem skutečně patří přihlášenému uživateli
         $stmt_check = $pdo->prepare("SELECT id_pronajem FROM PRONAJMY WHERE id_pronajem = ? AND UZIVATELE_id_osoba = ?");
         $stmt_check->execute([$id_pronajem, $user_id]);
 

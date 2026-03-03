@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: ConsoleCloud API
   version: 1.0.0
-  description: API pro ovládání cloudových herních konzolí
+  description: API pro Zapnutí / Vypnutí pronajaté konzole
 paths:
   /actions/toggle_power.php:
     post:
@@ -25,8 +25,8 @@ paths:
                   example: 1
       responses:
         '302':
-          description: Úspěšná akce, přesměrování zpět na dashboard
+          description: Úspěšná akce, přesměrování na dashboard
         '401':
-          description: Neautorizovaný přístup (uživatel není přihlášen)
+          description: Chyba, uživatel není přihlášen
         '500':
           description: Chyba serveru nebo databáze
