@@ -1,0 +1,29 @@
+Funkční požadavky
+
+F1 – Autentizace a správa uživatelů: Systém musí umožňovat registraci a přihlášení uživatelů pomocí lokálního účtu (e-mail a heslo) nebo alternativně pomocí externího poskytovatele identity (Google OAuth 2.0). Uživatel se musí mít možnost kdykoliv odhlásit.
+
+F2 – Správa uživatelského profilu: Po přihlášení musí mít uživatel možnost zobrazit a upravit své osobní údaje (jméno, příjmení, telefon, dodací adresa).
+
+F3 – Katalog předplatného (Pricing): Systém musí zobrazovat dostupné tarify pronájmu hardwaru (např. hodinový, týdenní, měsíční) a jejich aktuální ceny.
+
+F4 – Zpracování objednávky a platby: Systém musí uživateli umožnit vybrat tarif a projít procesem (simulované) platby přes zabezpečené modální okno.
+
+F5 – Automatická alokace hardwaru: Po úspěšném potvrzení platby musí systém automaticky najít volnou konzoli požadovaného typu v databázi, exkluzivně ji přiřadit danému uživateli a změnit její stav tak, aby si ji nemohl pronajmout nikdo jiný.
+
+F6 – Uživatelský přehled (Dashboard): Systém musí přihlášenému uživateli zobrazovat seznam jeho aktivních pronájmů, včetně informací o konkrétní konzoli (typ, lokace datacentra) a zbývajícím čase pronájmu.
+
+F7 – Vzdálené ovládání konzole: Uživatelské rozhraní musí umožňovat vzdálenou změnu stavu pronajaté konzole (tlačítka pro "Zapnutí" a "Vypnutí" stroje) a vizualizovat její aktuální stav (Online/Offline indikátor).
+
+Nefunkční požadavky
+
+NF1 – Bezpečnost dat: Uživatelská hesla nesmí být v databázi uložena v čistém textu; musí být hashována pomocí moderních algoritmů (např. bcrypt). Komunikace s databází musí být chráněna proti SQL injection útokům pomocí připravených dotazů (PDO Prepared Statements).
+
+NF2 – Konkurence a transakce (Concurrency): Systém musí bezpečně zvládat situace, kdy se více uživatelů pokusí pronajmout konzoli ve stejný okamžik. Alokace hardwaru musí probíhat v rámci atomické databázové transakce (s využitím zámků na úrovni řádků FOR UPDATE), aby nedošlo k dvojímu pronajmutí stejného fyzického kusu.
+
+NF3 – Technologie: Aplikace bude implementována s využitím architektury Klient-Server. Backend poběží v jazyce PHP (verze 8.x) a bude využívat relační databázi MySQL. Frontend bude vytvořen pomocí HTML5, CSS3 a nativního JavaScriptu.
+
+NF4 – Responzivita a UI/UX: Uživatelské rozhraní musí být responzivní a plně funkční jak na desktopových prohlížečích, tak na mobilních zařízeních (smartphonech a tabletech).
+
+NF5 – Externí integrace: Pro fungování Google přihlášení systém vyžaduje integraci oficiální knihovny Google API Client pro PHP (spravované přes nástroj Composer) a aktivní připojení k internetu pro ověření tokenů.
+
+NF6 – Nasazení a prostředí: Aplikace musí být navržena tak, aby byla snadno nasaditelná na standardních webových serverech (např. Apache HTTP Server) s operačním systémem Linux (LAMP stack). Tajné klíče a přístupové údaje nesmí být součástí verzovaného kódu (budou ignorovány přes .gitignore).

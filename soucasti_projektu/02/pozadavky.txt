@@ -1,1 +1,0 @@
-Hlavním obchodním požadavkem systému ConsoleCloud je umožnit zákazníkům samoobslužný pronájem herního hardwaru s okamžitou dostupností. Systém musí zajistit kompletní proces od výběru tarifu, přes bezpečné zpracování (falešné) platby, až po alokaci konkrétního fyzického hardwaru v datacentru a jeho následné zpřístupnění uživateli pro vzdálené ovládání.
